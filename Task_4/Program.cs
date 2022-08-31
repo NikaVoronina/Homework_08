@@ -8,18 +8,21 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-int deep1 = InputInt("Введите размерность 1: ");
-int deep2 = InputInt("Введите размерность 2: ");
-int deep3 = InputInt("Введите размерность 3: ");
-int countNums = 89;
+Console.Write("Введите размер X: ");
+int X = int.Parse(Console.ReadLine()!);
+Console.Write("Введите размер Y: ");
+int Y = int.Parse(Console.ReadLine()!);
+Console.Write("Введите размер Z: ");
+int Z = int.Parse(Console.ReadLine()!);
+int countNums = 100;
 
-if (deep1 * deep2 * deep3 > countNums)
+if (X * Y * Z > countNums)
 {
     Console.Write("Массив слишком большой");
     return;
 }
 
-int[,,] resultNums = Create3DMassive(deep1, deep2, deep3);
+int[,,] resultNums = array3D(X, Y, Z);
 
 for (int i = 0; i < resultNums.GetLength(0); i++)
 {
@@ -34,43 +37,32 @@ for (int i = 0; i < resultNums.GetLength(0); i++)
     Console.WriteLine();
 }
 
-
-int[,,] Create3DMassive(int size1, int size2, int size3)
+int[,,] array3D(int X1, int Y2, int Z2)
 {
-    int[,,] array = new int[size1, size2, size3];
-    int[] values = new int[countNums];
-    int num
-     = 10;
-    for (int i = 0; i < values.Length; i++)
-        values[i] = num
-        ++;
-
-    for (int i = 0; i < values.Length; i++)
+    int[,,] array = new int[X1, Y2, Z2];
+    int[] massive = new int[countNums];
+    int num = 10;
+    for (int i = 0; i < massive.Length; i++)
     {
-        int randomInd = new Random().Next(0, values.Length);
-        int temp = values[i];
-        values[i] = values[randomInd];
-        values[randomInd] = temp;
+        massive[i] = num++;
     }
-
+    for (int i = 0; i < massive.Length; i++)
+    {
+        int randomInd = new Random().Next(0, massive.Length);
+        int temp = massive[i];
+        massive[i] = massive[randomInd];
+        massive[randomInd] = temp;
+    }
     int valueIndex = 0;
-
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
         {
             for (int k = 0; k < array.GetLength(2); k++)
             {
-                array[i, j, k] = values[valueIndex++];
+                array[i, j, k] = massive[valueIndex++];
             }
         }
     }
     return array;
-}
-
-
-int InputInt(string output)
-{
-    Console.Write(output);
-    return int.Parse(Console.ReadLine()!);
 }
