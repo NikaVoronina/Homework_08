@@ -14,7 +14,7 @@ Console.Write("Введите размер Y: ");
 int Y = int.Parse(Console.ReadLine()!);
 Console.Write("Введите размер Z: ");
 int Z = int.Parse(Console.ReadLine()!);
-int countNums = 100;
+int countNums = 89;
 
 if (X * Y * Z > countNums)
 {
