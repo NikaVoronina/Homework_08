@@ -7,3 +7,41 @@
 // 11 16 15 06
 // 10 09 08 07
 
+Console.Write("Введите размер массива: ");
+int size = int.Parse(Console.ReadLine()!);
+
+int[,] nums = new int[size, size];
+
+int temp = 1;
+int i = 0;
+int j = 0;
+
+while (temp <= size * size)
+{
+    nums[i, j] = temp;
+    temp++;
+    if (i <= j + 1 && i + j < size - 1)
+        j++;
+    else if (i < j && i + j >= size - 1)
+        i++;
+    else if (i >= j && i + j > size - 1)
+        j--;
+    else
+        i--;
+}
+
+PrintArray(nums);
+
+void PrintArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        Console.Write("[ ");
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write("{0,8:F2}", array[i, j] + " ");
+        }
+        Console.Write("]");
+        Console.WriteLine("");
+    }
+}
