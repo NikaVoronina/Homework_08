@@ -18,8 +18,7 @@ int colum = Convert.ToInt32(Console.ReadLine());
 
 int[,] numbers = new int[str, colum];
 FillArrayRandomNumbers(numbers);
-// Console.WriteLine();
-// Console.WriteLine("Массив до изменения:");
+Console.WriteLine("Массив до:");
 PrintArray(numbers);
 
 for (int i = 0; i < numbers.GetLength(0); i++)
@@ -38,8 +37,7 @@ for (int i = 0; i < numbers.GetLength(0); i++)
         }
     }
 }
-// Console.WriteLine();
-Console.WriteLine("Массив с упорядоченными значениями:");
+Console.WriteLine("Массив после:");
 PrintArray(numbers);
 
 void FillArrayRandomNumbers(int[,] array)
