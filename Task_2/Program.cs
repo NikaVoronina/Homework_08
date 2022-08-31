@@ -9,13 +9,37 @@
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
-Console.WriteLine("Введите размер массива: ");
-int massive = Convert.ToInt32(Console.ReadLine());
-int[,] numbers = new int[massive, massive];
-FillArrayRandomNumbers(numbers);
-PrintArray(numbers);
-int minsum = Int32.MaxValue;
-int indexLine = 0;
+
+Console.Write("Введите количество строк массива: ");
+int str = int.Parse(Console.ReadLine()!);
+Console.Write("Введите количество столбцов массива: ");
+int colum = int.Parse(Console.ReadLine()!);
+int[,] array = new int[str, colum];
+FillArrayRandomNumbers(array);
+PrintArray(array);
+
+int minSum = 0;
+int sumLine = SumLineElements(array, 0);
+for (int i = 1; i < array.GetLength(0); i++)
+{
+  int tempSumLine = SumLineElements(array, i);
+  if (sumLine > tempSumLine)
+  {
+    sumLine = tempSumLine;
+    minSum = i;
+  }
+}
+Console.WriteLine($"У {minSum + 1} строки наименьшая сумма элементов, которая равна {sumLine}");
+
+int SumLineElements(int[,] array, int i)
+{
+  int sumLine = array[i,0];
+  for (int j = 1; j < array.GetLength(1); j++)
+  {
+    sumLine += array[i,j];
+  }
+  return sumLine;
+}
 
 void FillArrayRandomNumbers(int[,] array)
 {
@@ -41,19 +65,3 @@ void PrintArray(int[,] array)
         Console.WriteLine("");
     }
 }
-
-for (int i = 0; i < numbers.GetLength(0); i++)
-{
-    int sum = 0;
-    for (int j = 0; j < numbers.GetLength(1); j++)
-    {
-        sum = sum + numbers[i, j];        
-    }
-    if (sum < minsum)
-    {
-        minsum = sum;
-        indexLine++;
-    }
-}
-
-Console.WriteLine("строка с наименьшей суммой елементов под номером: " + (indexLine) + ", с суммой элементов равной: " + (minsum));
